@@ -23,12 +23,14 @@ const getPhone = (idUser, callback) => {
   }, 2000);
 }
 
-const getAddress = (idUser) => {
-
-}
-
-const resolvePhone = (error, phone) => {
-  console.log('Phone:', phone);
+const getAddress = (idUser, callback) => {
+  setTimeout(() => {
+    return callback(null, {
+      street: 'Rua dos bobos',
+      number: 45,
+      city: 'Knowhere'
+    });
+  }, 2000);
 }
 
 // Declaramos a lambda diretamente no parâmetro de getUser
@@ -43,8 +45,26 @@ getUser((error, user) => {
     console.error('Erro on getUser:', error);
     return;
   }
-  console.log('User:', user);
-  getPhone(user.id, resolvePhone)
+  
+  getPhone(user.id, (error1, phone) => {
+    if (error1) {
+      console.error('Erro on getPhone:', error1);
+      return;
+    }
+
+    getAddress(user.id, (error2, address) => {
+      if (error2) {
+        console.error('Erro on getAddress:', error2);
+        return;
+      }
+
+      console.log(`
+        Name: ${user.name},
+        Address: ${address.street}, ${address.number}, ${address.city},
+        Phone: ${phone.phone}
+      `);
+    })
+  });
 });
 
 
