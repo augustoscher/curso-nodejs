@@ -42,6 +42,15 @@ const getAddress = (idUser, callback) => {
   }, 2000);
 }
 
+getUser()
+  .then(result => {
+    console.log('resultado:', result)
+  })
+  .catch(error => {
+    console.error('Erro on getUser:', error);
+  })
+
+
 // getUser((error, user) => {
 //   //null || "" || 0 === false
 //   if (error) {
