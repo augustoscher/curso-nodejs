@@ -4,6 +4,9 @@
 2- Obter o endereço do usuário pelo ID
 */
 
+//importando um módulo do node.js
+const util = require('util');
+
 //Com lambda
 // new Promise((resolve, reject) => {
 // })
@@ -45,6 +48,8 @@ const getAddress = (idUser, callback) => {
   }, 2000);
 }
 
+const getAddressAsync = util.promisify(getAddress)
+
 getUser()
   .then(user => {
     return getPhone(user.id)
@@ -54,6 +59,16 @@ getUser()
           phone: phone
         }
       })
+  })
+  .then(res => {
+    return getAddressAsync(res.user.id)
+      .then(address => {
+        return {
+          user: res.user,
+          phone: res.phone,
+          address: address
+        };
+    });
   })
   .then(result => {
     console.log('result:', result)
