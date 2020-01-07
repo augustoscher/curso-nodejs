@@ -12,8 +12,9 @@ const getUser = () => {
   //function resolve recebe dois parâmetros:
   //quando der erro, chamaremos: reject(error)
   //quando sucesso, chamaremos: resolve()
-  return new Promise(function resolve(resolve, reject) {
+  return new Promise(function resolvePromise(resolve, reject) {
     setTimeout(() => {
+      // return reject(new Error('Deu ruim de verdade!'));
       return resolve({
         id: 1,
         name: 'Aladin',
@@ -23,13 +24,15 @@ const getUser = () => {
   })
 }
 
-const getPhone = (idUser, callback) => {
-  setTimeout(() => {
-    return callback(null, {
-      phone: '110099002',
-      ddd: 11,
-    });
-  }, 2000);
+const getPhone = (idUser) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      return resolve({
+        phone: '110099002',
+        ddd: 11,
+      });  
+    }, 2000);
+  })
 }
 
 const getAddress = (idUser, callback) => {
@@ -43,44 +46,22 @@ const getAddress = (idUser, callback) => {
 }
 
 getUser()
+  .then(user => {
+    return getPhone(user.id)
+      .then(phone => {
+        return {
+          user: user,
+          phone: phone
+        }
+      })
+  })
   .then(result => {
-    console.log('resultado:', result)
+    console.log('result:', result)
+  }) 
+  .catch(error => {
+    console.error('Erro on getPhone:', error);
   })
   .catch(error => {
     console.error('Erro on getUser:', error);
-  })
-
-
-// getUser((error, user) => {
-//   //null || "" || 0 === false
-//   if (error) {
-//     console.error('Erro on getUser:', error);
-//     return;
-//   }
-  
-//   getPhone(user.id, (error1, phone) => {
-//     if (error1) {
-//       console.error('Erro on getPhone:', error1);
-//       return;
-//     }
-
-//     getAddress(user.id, (error2, address) => {
-//       if (error2) {
-//         console.error('Erro on getAddress:', error2);
-//         return;
-//       }
-
-//       console.log(`
-//         Name: ${user.name},
-//         Address: ${address.street}, ${address.number}, ${address.city},
-//         Phone: ${phone.phone}
-//       `);
-//     })
-//   });
-// });
-
-
-
-
-
+  });
 
