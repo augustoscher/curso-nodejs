@@ -58,6 +58,7 @@ async function main() {
     // const phone = await getPhone(user.id)
     // const address = await getAddressAsync(user.id)
 
+    //Tem ganho de performance
     const result = await Promise.all([
       getAddressAsync(user.id),
       getPhone(user.id)
