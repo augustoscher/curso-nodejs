@@ -52,6 +52,8 @@ const getAddressAsync = util.promisify(getAddress)
 //1- Adicionar async na function e automaticamente ela retornará uma promise
 async function main() {
   try {
+
+    console.time('execution-time')
     const user = await getUser();
     const phone = await getPhone(user.id)
     const address = await getAddressAsync(user.id)
@@ -61,6 +63,9 @@ async function main() {
       Phone: (${phone.ddd}) ${phone.phone},
       Address: ${address.street}, ${address.number}, ${address.city}
     `);
+
+    console.timeEnd('execution-time')
+
   } catch(error) {
     console.error('Deu ruim', error);
   }
