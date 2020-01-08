@@ -66,9 +66,3 @@ getUser((error, user) => {
     })
   });
 });
-
-
-
-
-
-
