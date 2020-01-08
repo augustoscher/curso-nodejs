@@ -46,33 +46,24 @@ const getAddress = (idUser, callback) => {
 
 const getAddressAsync = util.promisify(getAddress)
 
-getUser()
-  .then(user => {
-    return getPhone(user.id)
-      .then(phone => {
-        return {
-          user: user,
-          phone: phone
-        }
-      })
-  })
-  .then(res => { //sempre recebe como resultado o return do then anterior. Padrão pipes
-    return getAddressAsync(res.user.id)
-      .then(address => {
-        return {
-          user: res.user,
-          phone: res.phone,
-          address: address
-        };
-    });
-  })
-  .then(result => {
-    console.log('result:', result)
-  }) 
-  .catch(error => {
-    console.error('Erro on getPhone:', error);
-  })
-  .catch(error => {
-    console.error('Erro on getUser:', error);
-  });
 
+// ----- EXECUTION ----- 
+
+//1- Adicionar async na function e automaticamente ela retornará uma promise
+async function main() {
+  try {
+    const user = await getUser();
+    const phone = await getPhone(user.id)
+    const address = await getAddressAsync(user.id)
+
+    console.log(`
+      Name: ${user.name},
+      Phone: (${phone.ddd}) ${phone.phone},
+      Address: ${address.street}, ${address.number}, ${address.city}
+    `);
+  } catch(error) {
+    console.error('Deu ruim', error);
+  }
+}
+
+main();
