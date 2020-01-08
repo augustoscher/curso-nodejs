@@ -60,7 +60,7 @@ getUser()
         }
       })
   })
-  .then(res => {
+  .then(res => { //sempre recebe como resultado o return do then anterior
     return getAddressAsync(res.user.id)
       .then(address => {
         return {
@@ -79,4 +79,3 @@ getUser()
   .catch(error => {
     console.error('Erro on getUser:', error);
   });
-
