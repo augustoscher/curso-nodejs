@@ -14,9 +14,10 @@ async function main() {
 
     //map é mais performático
     console.time('map')
-    const names2 = result.results.map(item => {
-      return item.name
-    })
+    // const names3 = result.results.map(item => {
+    //   return item.name
+    // })
+    const names2 = result.results.map(item => item.name);
     console.timeEnd('map')
     
     console.log('names: ', names2)
