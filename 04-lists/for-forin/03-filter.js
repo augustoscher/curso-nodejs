@@ -15,7 +15,7 @@ async function main() {
     const names = larsFamily.map(item => item.name);
     
     console.log(`lars family: `, larsFamily);
-    console.log('names: ', names);
+    console.log('lars names: ', names);
   } catch(error) {
     console.error('Deu ruim: ', error);
   }
