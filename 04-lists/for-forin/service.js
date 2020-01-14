@@ -10,8 +10,8 @@ const getPeople = async (name) => {
     console.error(`service error: `, error);
     const result = {
       results: [
-        {name: "Luke Skywalker"},
-        {name: "Akia Lars"}
+        {name: "Luke Skywalker", age: 34},
+        {name: "Akia Lars", age: 65}
       ]
     }
     return result;
