@@ -1,5 +1,9 @@
 const { getPeople } = require('./service');
 
+Array.prototype.myReduce = function(callback) {
+  
+}
+
 async function main() {
   try {
     const { results } = await getPeople('a');
