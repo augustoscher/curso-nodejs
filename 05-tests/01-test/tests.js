@@ -1,5 +1,10 @@
 const assert = require('assert');
 
-assert.ok(false)
+//Não precisamos de nenhum módulo de testes
+//Próprio node já permite trabalhar com asserções.
+assert.ok(true);
+assert.ok(false);
+
+
 
 
