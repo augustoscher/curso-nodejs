@@ -1,17 +1,14 @@
+const axios = require('axios');
+const URL = 'https://swapi.co/api/people';
 
-const valuesErrors = [1];
-
-if (valuesErrors === undefined || !valuesErrors.length) {
-  console.log('valid');
-} else {
-  console.log('invalid')
+const getPeople = async (name) => {
+  try {
+    const url = `${URL}/search=${name}&format=json`;
+    const result = await axios.get(url);
+    return result.data
+  } catch(error) {
+    console.error(`service error: `, error);
+  }
 }
 
-
-const str = '';
-
-if (str) {
-  console.log('entrou');
-} else {
-  console.log('nm entrou');
-}
+module.exports = { getPeople }
