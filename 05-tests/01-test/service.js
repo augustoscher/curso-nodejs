@@ -5,6 +5,7 @@ const getPeople = async (name) => {
   try {
     const url = `${URL}/?search=${name}&format=json`;
     const result = await axios.get(url);
+    // console.log(result.data);
     return result.data.results.map(mapPerson);
   } catch(error) {
     console.error(`service error: `, error);
