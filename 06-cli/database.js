@@ -9,17 +9,19 @@ class Database {
     this.FILE_NAME = 'heroes.json';
   }
 
-  getData() {
+  async getData() {
     const file = await readFileAsync(this.FILE_NAME, 'utf8');
-    
+    return JSON.parse(file.toString());
   }
 
   writeData() {
 
   }
 
-  listar() {
-    return null;
+  async listar(id) {
+    const data = await this.getData();
+    const result = data.filter(item => id ? (item.id === id) : true);
+    return result;
   }
 }
 
