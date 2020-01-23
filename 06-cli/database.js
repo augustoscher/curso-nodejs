@@ -33,6 +33,10 @@ class Database {
     const result = data.filter(item => id ? (item.id === id) : true);
     return result;
   }
+
+  async remove(id) {
+    return true;
+  }
 }
 
 module.exports = new Database();

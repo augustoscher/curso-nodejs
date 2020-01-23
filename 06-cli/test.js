@@ -30,6 +30,12 @@ describe('Suite de manipulação de herois', () => {
     const expected = DEFAULT_ITEM;
     const result = await database.save(DEFAULT_ITEM);
     const [actual] = await database.list(DEFAULT_ITEM.id)
-    ok(actual, expected);
+    deepEqual(actual, expected);
+  });
+
+  it('Deve remover heroi por id', async () => {
+    const expected = true;
+    const result = await database.remove(DEFAULT_ITEM.id);
+    deepEqual(result, expected);
   });
 });
