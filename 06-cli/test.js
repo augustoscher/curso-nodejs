@@ -10,13 +10,14 @@ describe('Suite de manipulação de herois', () => {
     const expected = DEFAULT_ITEM;
 
     //usa destructuring para pegar somente o primeiro elemento
-    const [result] = await database.listar(expected.id);
+    const [result] = await database.list(expected.id);
     deepEqual(result, expected);
   });
 
-  // it('Deve cadastrar heroi usando arquivos', () => {
-  //   const expected = DEFAULT_ITEM;
-
-  //   ok(null, expected);
-  // });
+  it('Deve cadastrar heroi usando arquivos', async () => {
+    const expected = DEFAULT_ITEM;
+    const result = await database.save(DEFAULT_ITEM);
+    const [actual] = await database.list(DEFAULT_ITEM.id)
+    ok(actual, expected);
+  });
 });
