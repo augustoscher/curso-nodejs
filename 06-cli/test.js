@@ -14,6 +14,10 @@ const DEFAULT_ITEM = { name: 'Flash', power: 'Speed', id: 1 };
 
 describe('Suite de manipulação de herois', () => {
 
+  before(async() => {
+    await database.save(DEFAULT_ITEM);
+  })
+
   it('Deve pesquisar heroi usando arquivos', async () => {
     const expected = DEFAULT_ITEM;
 
