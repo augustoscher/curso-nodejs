@@ -5,10 +5,8 @@
 
 */
 
-
 const { deepEqual, ok } = require('assert');
 const database = require('./database');
-
 
 const DEFAULT_ITEM = { name: 'Flash', power: 'Speed', id: 1 };
 
