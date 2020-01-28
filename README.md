@@ -7,4 +7,8 @@ Node.js by @NodeBR @erickwendel_
 
 ## 3 - Events
 
-## 4 - Tests
+## 4 - Lists
+
+## 05 - Tests
+
+## 06 - CLI
