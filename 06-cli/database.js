@@ -35,7 +35,16 @@ class Database {
   }
 
   async remove(id) {
-    return true;
+    if(!id) {
+      return this.writeData([]);
+    }
+    const data = await this.getData();
+    const idx = data.findIndex(item => item.id === parseInt(id));
+    if (idx === -1) {
+      throw Error('User does not exists');
+    }
+    data.splice(idx, 1);
+    return await this.writeData(data);
   }
 }
 
