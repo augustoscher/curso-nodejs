@@ -15,6 +15,7 @@ describe('Suite de manipulação de herois', () => {
 
   before(async() => {
     await database.save(DEFAULT_ITEM);
+    await database.save(DEFAULT_ITEM_2);
   })
 
   it('Deve pesquisar heroi usando arquivos', async () => {
@@ -48,8 +49,8 @@ describe('Suite de manipulação de herois', () => {
       name: 'Batman',
       power: 'Money',
     };
-    await database.update(DEFAULT_ITEM_2, data);
-    const result = await database.list(DEFAULT_ITEM_2.id);
+    await database.update(DEFAULT_ITEM_2.id, data);
+    const [result] = await database.list(DEFAULT_ITEM_2.id);
     deepEqual(result, expected);
   });
 });

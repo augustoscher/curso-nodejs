@@ -41,10 +41,28 @@ class Database {
     const data = await this.getData();
     const idx = data.findIndex(item => item.id === parseInt(id));
     if (idx === -1) {
-      throw Error('User does not exists');
+      throw Error('Hero does not exists');
     }
     data.splice(idx, 1);
     return await this.writeData(data);
+  }
+
+  async update(id, item) {
+    const data = await this.getData();
+    const idx = data.findIndex(item => item.id === parseInt(id));
+    if(idx === -1) {
+      throw Error('Hero does not exists')
+    }
+    const actual = data[idx];
+    const updateObj = {
+      ...actual,
+      ...item
+    }
+    data.splice(idx, 1);
+    return await this.writeData([
+      ...data,
+      updateObj
+    ])
   }
 }
 
