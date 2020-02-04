@@ -9,6 +9,7 @@ const { deepEqual, ok } = require('assert');
 const database = require('./database');
 
 const DEFAULT_ITEM = { name: 'Flash', power: 'Speed', id: 1 };
+const DEFAULT_ITEM_2 = { name: 'Green Arrow', power: 'Bow', id: 2 };
 
 describe('Suite de manipulação de herois', () => {
 
@@ -34,6 +35,21 @@ describe('Suite de manipulação de herois', () => {
   it('Deve remover heroi por id', async () => {
     const expected = true;
     const result = await database.remove(DEFAULT_ITEM.id);
+    deepEqual(result, expected);
+  });
+  
+  it('Deve atualizar heroi por id', async () => {
+    const expected = {...DEFAULT_ITEM_2,
+      name: 'Batman',
+      power: 'Money',
+    };
+
+    const data = {
+      name: 'Batman',
+      power: 'Money',
+    };
+    await database.update(DEFAULT_ITEM_2, data);
+    const result = await database.list(DEFAULT_ITEM_2.id);
     deepEqual(result, expected);
   });
 });
