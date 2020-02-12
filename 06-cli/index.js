@@ -9,6 +9,7 @@ const Hero = require('./Hero');
 //node index.js -s -n Flash -p Speed
 //node index.js -l
 //node index.js -r -i 1581478623768
+//node index.js -u 1581478623768 -n Batman -p Money
 const main = async() => {
   commander
       .version('v1')
