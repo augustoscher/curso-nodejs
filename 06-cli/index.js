@@ -14,14 +14,23 @@ const main = async() => {
       .option('-p, --power [value]', "Hero Power")
 
       .option('-s, --save', "Save Hero")
+      .option('-l, --list', "List all Heros")
       .parse(process.argv);
   
   const hero = new Hero(commander);
-  console.log(hero);
 
   try {
     if (commander.save) {
-      const resultado = await database.save(hero)
+      const resultado = await database.save(hero);
+      if (!resultado) {
+        console.error('Error on saving new Hero');
+        return;
+      }
+    }
+
+    if (commander.list) {
+      const resultado = await database.list();
+      console.log(resultado);
     }
     
   } catch(e) {
