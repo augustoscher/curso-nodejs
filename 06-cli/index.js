@@ -31,6 +31,7 @@ const main = async() => {
     if (commander.list) {
       const resultado = await database.list();
       console.log(resultado);
+      return;
     }
     
   } catch(e) {
