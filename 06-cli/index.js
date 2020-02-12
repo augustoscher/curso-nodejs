@@ -19,6 +19,7 @@ const main = async() => {
       .option('-s, --save', "Save Hero")
       .option('-l, --list', "List all Heros")
       .option('-r, --remove', "Remove Hero by id")
+      .option('-u, --update [id]', "Update Hero by id")
       .parse(process.argv);
   
   const hero = new Hero(commander);
@@ -48,6 +49,21 @@ const main = async() => {
       }
       console.log('Hero sucessfuly removed!') 
     }
+    
+    if (commander.update) {
+      const idToUpdate = parseInt(commander.update);
+      delete hero.id;
+      //remove all properties who are undefined or null
+      const data = JSON.stringify(hero);
+      const heroToUpdate = JSON.parse(data);
+      const result = await database.update(idToUpdate, heroToUpdate);
+      if (!result) {
+        console.error("Error while updating Hero!");
+        return;
+      }
+      console.log("Hero sucessfuly updated!")
+    }
+
   } catch(e) {
     console.error('Deu ruim', e)
   }
