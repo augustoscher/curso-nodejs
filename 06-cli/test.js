@@ -2,7 +2,6 @@
   Executar:
     mocha test.js
     mocha test.js --reporter=nyan
-
 */
 
 const { deepEqual, ok } = require('assert');
