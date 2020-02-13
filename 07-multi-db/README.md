@@ -1,5 +1,5 @@
 #### Running Postgres container
-```
+```bash
 docker run \
   --name postgres \
   -e POSTGRES_USER=augustoscher \
@@ -10,17 +10,22 @@ docker run \
   postgres
 ```
 #### Enter on postgres container
+```bash
 docker exec -it postgres /bin/bash
+```
 
 #### Running Adminer container
+```bash
 docker run \
   --name adminer \
   -p 8080:8080 \
   --link postgres:postgres \
   -d \
   adminer
+```
 
 #### Running MongoDB container
+```bash
 docker run \
   --name mongodb \
   -p 27017:27017 \
@@ -28,3 +33,4 @@ docker run \
   -e MONGO_INITDB_ROOT_PASSWORD=senhaadmin \
   -d \
   mongo:4
+```
