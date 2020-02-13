@@ -44,3 +44,10 @@ docker run \
   -d \
   mongoclient/mongoclient
 ```
+
+#### Creating user on mongodb
+```bash
+docker exec -it mongodb \
+  mongo --host localhost -u admin -p senhaadmin --authenticationDatabase admin \
+  --eval "db.getSiblingDB('heroes').createUser({user: 'augustoscher', pwd: 'minhasenhasecreta', roles: [{role: 'readWrite', db: 'heroes'}]})"
+```
