@@ -1,8 +1,6 @@
-const {
-  ContextStrategy,
-  Postgres,
-  MongoDB,
-} = require('./strategy');
+const { Postgres } = require('../src/db/strategies/postgres');
+const { MongoDB } = require('../src/db/strategies/mongodb'); 
+const { ContextStrategy } = require('../src/db/strategies/base/contextStrategy');
 
 const main = () => {
   const contextMongo = new ContextStrategy(new MongoDB());
