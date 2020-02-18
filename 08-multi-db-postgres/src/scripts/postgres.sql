@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS heroes;
+
+CREATE TABLE heroes (
+  id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+  name text not null,
+  power text not null
+);
+
+INSERT INTO HEROES (NAME, POWER) VALUES ('Batman', 'Money');
+INSERT INTO HEROES (NAME, POWER) VALUES ('Flash', 'Speed');
+
+SELECT * FROM HEROES;
+SELECT * FROM HEROES WHERE NAME = 'Flash'
