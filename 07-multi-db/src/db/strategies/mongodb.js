@@ -1,4 +1,4 @@
-const { ICrud } = require('./base/iCrud');
+const ICrud = require('./base/iCrud');
 
 class MongoDB extends ICrud {
 
@@ -23,4 +23,4 @@ class MongoDB extends ICrud {
   }
 }
 
-module.exports = { MongoDB };
+module.exports = MongoDB;

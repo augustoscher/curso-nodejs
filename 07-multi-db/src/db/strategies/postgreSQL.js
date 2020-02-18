@@ -1,4 +1,4 @@
-const { ICrud } = require('./base/iCrud');
+const ICrud = require('./base/iCrud');
 
 class PostgreSQL extends ICrud {
   constructor(){
@@ -22,4 +22,4 @@ class PostgreSQL extends ICrud {
   }
 }
 
-module.exports = { PostgreSQL };
+module.exports = PostgreSQL;

@@ -1,4 +1,4 @@
-const { ICrud } = require('./iCrud');
+const ICrud = require('./iCrud');
 
 class ContextStrategy extends ICrud {
   constructor(strategy) {
@@ -23,4 +23,4 @@ class ContextStrategy extends ICrud {
   }
 }
 
-module.exports = { ContextStrategy };
+module.exports = ContextStrategy;

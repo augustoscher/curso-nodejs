@@ -1,4 +1,4 @@
-const { NotImplementedException } = require('./notImplementedException');
+const NotImplementedException = require('./notImplementedException');
 
 class ICrud {
   create(item) {
@@ -18,4 +18,4 @@ class ICrud {
   }
 }
 
-module.exports = { ICrud };
+module.exports = ICrud;
