@@ -43,3 +43,25 @@ class ContextStrategy extends ICrud {
     this._database.delete(id);
   }
 }
+
+class PostgresStrategy extends ICrud {
+  create(item) {
+   
+  }
+
+  read(query) {
+   
+  }
+
+  update(id, item) {
+   
+  }
+
+  delete(id) {
+   
+  }
+}
+
+
+
+
