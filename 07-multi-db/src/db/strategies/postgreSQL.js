@@ -1,12 +1,12 @@
 const { ICrud } = require('./base/iCrud');
 
-class Postgres extends ICrud {
+class PostgreSQL extends ICrud {
   constructor(){
     super()
   }
 
   create(item) {
-   console.log('item foi salvo em postgres');
+   console.log('item foi salvo em postgreSQL');
   }
 
   read(query) {
@@ -22,4 +22,4 @@ class Postgres extends ICrud {
   }
 }
 
-module.exports = { Postgres };
+module.exports = { PostgreSQL };
