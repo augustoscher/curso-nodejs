@@ -20,6 +20,10 @@ class PostgreSQL extends ICrud {
   delete(id) {
    
   }
+
+  isConnected() {
+    
+  }
 }
 
 module.exports = PostgreSQL;
