@@ -8,6 +8,7 @@ const main = () => {
   console.log(mails);
   console.log()
 
+  //Get random items of an array
   for(let i = 0; i <= 10; i++) {
     console.log(mails[Math.floor(Math.random() * mails.length)]);
   }
