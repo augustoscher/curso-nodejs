@@ -1,3 +1,7 @@
+#### Dependencies
+npm install --save-dev sequelize
+npm install --save-dev pg-hstore pg
+
 #### Running Postgres container
 ```bash
 docker run \
