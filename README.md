@@ -12,3 +12,7 @@ Node.js by @NodeBR @erickwendel_
 ## 05 - Tests
 
 ## 06 - CLI
+
+## 07 - MultiDB - Strategy Pattern
+
+## 08 - MultiDB - Postgres
