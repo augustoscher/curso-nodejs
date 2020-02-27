@@ -1,3 +1,7 @@
+#### Dependencies
+npm install --save-dev sequelize
+npm install --save-dev pg-hstore pg
+
 #### Running Postgres container
 ```bash
 docker run \
@@ -44,6 +48,13 @@ docker run \
   -d \
   mongoclient/mongoclient
 ```
+#### Mongoclient
+- Access http://localhost:3000
+- Host/port: mongodb:27017
+- User/Password: admin/senhaadmin
+- Database name: admin
+- Auth Type: Scram-Sha-1
+- User/Password: admin/senhaadmin
 
 #### Creating user on mongodb
 ```bash
