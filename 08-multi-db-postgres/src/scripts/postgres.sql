@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS heroes;
+DROP TABLE IF EXISTS HEROES;
 
-CREATE TABLE heroes (
+CREATE TABLE HEROES (
   id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
   name text not null,
   power text not null
