@@ -34,6 +34,10 @@ const main = async () => {
 
   await heroes.sync();
 
+  await heroes.create({
+    name: 'Goku',
+    power: 'Strenght'
+  });
   const result = await heroes.findAll({ raw: true });
   console.log('result: ', result);
 };
