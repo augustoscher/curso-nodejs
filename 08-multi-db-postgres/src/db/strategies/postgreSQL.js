@@ -26,7 +26,12 @@ class PostgreSQL extends ICrud {
   }
 
   async isConnected() {
-    
+    try {
+      await this._driver.authenticate();
+      return true;
+    } catch(e) {
+      console.log('fail: ', e)
+    }
   }
 
   defineModel() {
