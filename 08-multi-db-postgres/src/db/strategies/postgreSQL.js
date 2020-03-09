@@ -34,7 +34,7 @@ class PostgreSQL extends ICrud {
     }
   }
 
-  defineModel() {
+  async defineModel() {
     this._heroes = driver.define(
       "heroes",
       {
