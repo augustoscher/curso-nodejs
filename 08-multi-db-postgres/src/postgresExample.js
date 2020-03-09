@@ -38,8 +38,11 @@ const main = async () => {
     name: 'Goku',
     power: 'Strenght'
   });
-  const result = await heroes.findAll({ raw: true });
+  let result = await heroes.findAll({ raw: true });
   console.log('result: ', result);
+  console.log()
+  result = await heroes.findAll({ raw: true, attributes: ['name'] });
+  console.log('result2: ', result);
 };
 
 main();
