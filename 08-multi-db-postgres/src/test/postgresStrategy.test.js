@@ -16,9 +16,21 @@ describe("Postgres Strategy", function () {
     assert.equal(result, true)
   });
 
-  it('Save on Postgres', async () => {
+  it('Save heroes on Postgres', async () => {
     const res = await context.create(MOCKED_HERO);
     delete res.id;
     assert.deepEqual(res, MOCKED_HERO);
+  });
+
+  it('List heroes on Postgres', async () => {
+    const [res] = await context.read({ name: MOCKED_HERO.name });
+    delete res.id;
+    assert.deepEqual(res, MOCKED_HERO);
+  });
+
+  it('Update heroes on Postgres', async () => {
+    // const [res] = await context.read({ name: MOCKED_HERO.name });
+    // delete res.id;
+    // assert.deepEqual(res, MOCKED_HERO);
   });
 });

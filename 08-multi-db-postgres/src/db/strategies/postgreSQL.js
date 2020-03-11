@@ -13,8 +13,8 @@ class PostgreSQL extends ICrud {
     return dataValues;
   }
 
-  read(query) {
-   
+  async read(item = {}) {
+    return this._heroes.findAll({ where: item, raw: true });
   }
 
   update(id, item) {
