@@ -17,8 +17,8 @@ class PostgreSQL extends ICrud {
     return this._heroes.findAll({ where: item, raw: true });
   }
 
-  update(id, item) {
-   
+  async update(id, item) {
+    return this._heroes.update(item, { where: { id: id } });
   }
 
   delete(id) {
