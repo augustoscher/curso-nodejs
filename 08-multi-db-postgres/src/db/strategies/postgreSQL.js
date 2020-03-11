@@ -21,8 +21,9 @@ class PostgreSQL extends ICrud {
     return this._heroes.update(item, { where: { id: id } });
   }
 
-  delete(id) {
-   
+  async delete(id) {
+    const query = id ? { id } : {}
+    return this._heroes.destroy({where: query});
   }
 
   async isConnected() {

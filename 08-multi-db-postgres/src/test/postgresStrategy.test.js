@@ -10,8 +10,9 @@ describe("Postgres Strategy", function () {
   this.timeout(Infinity)
   this.beforeAll(async function () {
     await context.connect();
+    await context.delete();
     await context.create(MOCKED_HERO_UPD);
-  })
+  });
 
   it('Postgres Connection', async () => {
     const result = await context.isConnected()
@@ -41,6 +42,11 @@ describe("Postgres Strategy", function () {
 
     assert.deepEqual(res, 1);
     assert.deepEqual(res2.name, newItem.name);
+  });
 
+  it('Delete heroe on Postgres', async () => {
+    const [item] = await context.read({});
+    const res = await context.delete(item.id)
+    assert.deepEqual(res, 1)
   });
 });
