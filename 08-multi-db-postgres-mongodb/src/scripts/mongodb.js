@@ -25,8 +25,9 @@ for (let i = 0; i<100000; i++){
 //update
 db.heroes.update({name: 'Clone100'}, {name: 'Batman', power: 'Money'})
 
-//Update just one value
+//Update just one attribute. If attribute dont eixsts, it'll be created
 db.heroes.update({name: 'Clone101'}, { $set: { name: 'Captain America'}})
 
+db.heroes.update({power: 'Speed'}, { $set: { power: 'Super Strength'}})
 //delete
 
