@@ -2,6 +2,11 @@
 // docker exec -it mongodb \
 //   mongo -u admin -p senhaadmin --authenticationDatabase admin
 
+//> mongo --host localhost -u admin -p senhaadmin --authenticationDatabase admin
+//> db.getSiblingDB('heroes').createUser({user: 'augustoscher', pwd: 'minhasenhasecreta', roles: [{role: 'readWrite', db: 'heroes'}]})
+
+//npm install mongoose
+
 //mostrar databases
 //show dbs
 
