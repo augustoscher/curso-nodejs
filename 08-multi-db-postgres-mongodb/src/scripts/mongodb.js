@@ -1,15 +1,15 @@
 
-docker exec -it mongodb \
-  mongo -u admin -p senhaadmin --authenticationDatabase admin
+// docker exec -it mongodb \
+//   mongo -u admin -p senhaadmin --authenticationDatabase admin
 
 //mostrar databases
-show dbs
+//show dbs
 
 //configurando o contexto para heros db
-use heroes
+//use heroes
 
 //mostrar collections
-show collections
+//show collections
 
 //find
 db.heroes.find({}).limit(1000).sort({"_id": 1 })
@@ -25,5 +25,8 @@ for (let i = 0; i<100000; i++){
 //update
 db.heroes.update({name: 'Clone100'}, {name: 'Batman', power: 'Money'})
 
-//deleete
+//Update just one value
+db.heroes.update({name: 'Clone101'}, { $set: { name: 'Captain America'}})
+
+//delete
 
