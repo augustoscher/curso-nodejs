@@ -28,6 +28,8 @@ db.heroes.update({name: 'Clone100'}, {name: 'Batman', power: 'Money'})
 //Update just one attribute. If attribute dont eixsts, it'll be created
 db.heroes.update({name: 'Clone101'}, { $set: { name: 'Captain America'}})
 
+//Updates only first occurence. To update all we need to add {multi: true}
 db.heroes.update({power: 'Speed'}, { $set: { power: 'Super Strength'}})
-//delete
 
+//delete
+db.heroes.remove({name: 'Clone999'})
