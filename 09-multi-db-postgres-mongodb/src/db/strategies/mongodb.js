@@ -1,13 +1,22 @@
 const ICrud = require("./base/iCrud");
 const Mongoose = require("mongoose");
+const STATUS = {
+  0: 'Desconected',
+  1: 'Connected',
+  2: 'Conecting',
+  3: 'Desconecting'
+};
 
 class MongoDB extends ICrud {
   constructor() {
-    //When we extend a class, we need to call constructor
     super();
+    this._heroes = null;
+    this._connection = null;
   }
 
-  create(item) {}
+  async create(item) {
+    return await model.create(item);
+  }
 
   read(query) {}
 
@@ -15,9 +24,35 @@ class MongoDB extends ICrud {
 
   delete(id) {}
 
-  async isConnected() {}
+  async isConnected() {
+    const state = STATUS[connection.readyState];
+    if (state === 'Conected') return state;
 
-  async defineModel() {}
+    if (state !== 'Conecting') return state;
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return STATUS[connection.readyState];
+  }
+
+  async defineModel() {
+    const heroeSchema = new Mongoose.Schema({
+      name: {
+        type: String,
+        required: true
+      },
+      power: {
+        type: String,
+        required: true
+      },
+      createdAt: {
+        type: Date,
+        default: new Date()
+      }
+    });
+
+    const model = Mongoose.model("heroe", heroeSchema);
+  }
 
   async connect() {
     Mongoose.connect(
@@ -31,10 +66,10 @@ class MongoDB extends ICrud {
     );
 
     const connection = Mongoose.connection;
-    connection.once("open", () => console.log("Database rodando!"));
-    //0- Desconected | 1- Connected | 2- Conecting | 3- Desconecting
-    // const state = connection.readyState;
-    // console.log('state: ', state);
+    connection.once("open", () => {
+      console.log("Database rodando!")
+      this._connection = connection;
+    });
   }
 }
 
