@@ -19,7 +19,9 @@ describe("MongoDB Strategy", function () {
       assert.deepEqual(result, 'Connected')
     });
   
-    it('Save heroes on Mongo', async () => {
+    it("Save heroes on Mongo", async () => {
+      const { name, power } = await context.create(MOCKED_HERO);
+      assert.deepEqual({ name, power }, MOCKED_HERO);
     });
   
     it('List heroes on Mongo', async () => {
