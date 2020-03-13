@@ -31,8 +31,8 @@ describe("MongoDB Strategy", function () {
       assert.deepEqual({name, power}, MOCKED_HERO_DEF);
     });
   
-    // it('Update heroes on Mongo', async () => {
-    // });
+    it('Update heroes on Mongo', async () => {
+    });
   
     // it('Delete heroe on Mongo', async () => {
     // });
