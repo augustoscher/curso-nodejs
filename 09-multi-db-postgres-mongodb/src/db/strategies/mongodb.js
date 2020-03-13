@@ -14,15 +14,20 @@ class MongoDB extends ICrud {
     this._connection = null;
   }
 
-  async create(item) {
-    return await model.create(item);
+  create(item) {
+    return this._heroes.create(item);
   }
 
-  read(query) {}
+  read(query, skip, limit) {
+    return this._heroes.find(query).skip(skip).limit(limit);
+  }
 
   update(id, item) {}
 
-  delete(id) {}
+  delete(id) {
+    const query = id ? { id } : {}
+    return this._heroes.remove(query);
+  }
 
   async isConnected() {
     const state = STATUS[this._connection.readyState];
@@ -35,7 +40,7 @@ class MongoDB extends ICrud {
     return STATUS[this._connection.readyState];
   }
 
-  async defineModel() {
+  defineModel() {
     const heroeSchema = new Mongoose.Schema({
       name: {
         type: String,
@@ -70,6 +75,7 @@ class MongoDB extends ICrud {
       console.log("Database rodando!")
     });
     this._connection = connection;
+    this.defineModel();
   }
 }
 
