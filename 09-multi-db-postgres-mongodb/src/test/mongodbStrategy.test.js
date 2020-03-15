@@ -12,7 +12,6 @@ describe("MongoDB Strategy", function () {
     this.timeout(Infinity)
     this.beforeAll(async function () {
       await context.connect();
-      await context.delete();
       await context.create(MOCKED_HERO_DEF);
       const res = await context.create(MOCKED_HERO_UPD);
       MOCKED_ID = res._id;
@@ -44,7 +43,9 @@ describe("MongoDB Strategy", function () {
       assert.deepEqual(result.nModified, 1);
     });
   
-    // it('Delete heroe on Mongo', async () => {
-    // });
+    it('Delete heroe on Mongo', async () => {
+      const result = await context.delete(MOCKED_ID);
+      assert.deepEqual(result.n, 1);
+    });
   });
   

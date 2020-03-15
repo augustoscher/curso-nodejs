@@ -28,8 +28,7 @@ class MongoDB extends ICrud {
   }
 
   delete(id) {
-    const query = id ? { id } : {}
-    return this._heroes.deleteOne(query);
+    return this._heroes.deleteOne({ _id: id });
   }
 
   async isConnected() {
