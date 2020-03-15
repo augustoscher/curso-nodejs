@@ -5,6 +5,8 @@ const Context = require("../db/strategies/base/contextStrategy");
 const context = new Context(new Mongo());
 const MOCKED_HERO = { name: 'Iron Man', power: 'Money' };
 const MOCKED_HERO_DEF = { name: 'Batman', power: 'Money' };
+const MOCKED_HERO_UPD = { name: 'TestUpd', power: 'TestUpd' };
+let MOCKED_ID = '';
 
 describe("MongoDB Strategy", function () {
     this.timeout(Infinity)
@@ -12,6 +14,8 @@ describe("MongoDB Strategy", function () {
       await context.connect();
       await context.delete();
       await context.create(MOCKED_HERO_DEF);
+      const res = await context.create(MOCKED_HERO_UPD);
+      MOCKED_ID = res._id;
     });
   
     it('Mongo Connection', async () => {
@@ -32,6 +36,12 @@ describe("MongoDB Strategy", function () {
     });
   
     it('Update heroes on Mongo', async () => {
+      const result = await context.update(MOCKED_ID, {
+        name: 'SpiderMan',
+        power: 'Nerd'
+      });
+      
+      assert.deepEqual(result.nModified, 1);
     });
   
     // it('Delete heroe on Mongo', async () => {

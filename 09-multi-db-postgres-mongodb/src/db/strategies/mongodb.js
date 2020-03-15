@@ -22,11 +22,14 @@ class MongoDB extends ICrud {
     return this._heroes.find(query).skip(skip).limit(limit);
   }
 
-  update(id, item) {}
+  update(id, item) {
+    console.log('id ', id)
+    return this._heroes.updateOne({ _id: id }, { $set: item });
+  }
 
   delete(id) {
     const query = id ? { id } : {}
-    return this._heroes.remove(query);
+    return this._heroes.deleteOne(query);
   }
 
   async isConnected() {
