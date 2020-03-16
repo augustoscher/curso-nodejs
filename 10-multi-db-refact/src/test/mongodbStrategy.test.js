@@ -10,7 +10,7 @@ const MOCKED_HERO_DEF = { name: 'Batman', power: 'Money' };
 const MOCKED_HERO_UPD = { name: 'TestUpd', power: 'TestUpd' };
 let MOCKED_ID = '';
 
-describe("Hero CRUD Tests", function () {
+describe("Hero MongoDB Crud", function () {
     this.timeout(Infinity)
     this.beforeAll(async () => {
       const connection = Mongo.connect();
