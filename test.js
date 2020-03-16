@@ -10,3 +10,7 @@ const randomSet = (length, max) => {
   }
   return [...nums];
 }
+
+const series = ['Better Call Saul', 'Game of Thrones', 'Breaking Bad'];
+const indexed = series.map((item, idx) => { return {id: idx, name: item} })
+console.log(indexed);
