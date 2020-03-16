@@ -1,17 +1,21 @@
 const assert = require("assert");
-const Mongo = require("../db/strategies/mongodb");
+const Mongo = require("../db/strategies/mongodb/mongodb");
 const Context = require("../db/strategies/base/contextStrategy");
+const HeroSchema = require('../db/strategies/mongodb/schemas/heroSchema');
 
-const context = new Context(new Mongo());
+
+let context = {};
 const MOCKED_HERO = { name: 'Iron Man', power: 'Money' };
 const MOCKED_HERO_DEF = { name: 'Batman', power: 'Money' };
 const MOCKED_HERO_UPD = { name: 'TestUpd', power: 'TestUpd' };
 let MOCKED_ID = '';
 
-describe("MongoDB Strategy", function () {
+describe("Hero CRUD Tests", function () {
     this.timeout(Infinity)
-    this.beforeAll(async function () {
-      await context.connect();
+    this.beforeAll(async () => {
+      const connection = Mongo.connect();
+      context = new Context(new Mongo(connection, HeroSchema));
+
       await context.create(MOCKED_HERO_DEF);
       const res = await context.create(MOCKED_HERO_UPD);
       MOCKED_ID = res._id;

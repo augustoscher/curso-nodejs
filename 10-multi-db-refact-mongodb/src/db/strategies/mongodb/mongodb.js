@@ -1,4 +1,4 @@
-const ICrud = require("./base/iCrud");
+const ICrud = require("../base/iCrud");
 const Mongoose = require("mongoose");
 const STATUS = {
   0: 'Desconected',
@@ -8,27 +8,27 @@ const STATUS = {
 };
 
 class MongoDB extends ICrud {
-  constructor() {
+  constructor(connection, schema) {
     super();
-    this._heroes = null;
-    this._connection = null;
+    this._schema = schema;
+    this._connection = connection;
   }
 
   create(item) {
-    return this._heroes.create(item);
+    return this._schema.create(item);
   }
 
   read(query, skip, limit) {
-    return this._heroes.find(query).skip(skip).limit(limit);
+    return this._schema.find(query).skip(skip).limit(limit);
   }
 
   update(id, item) {
     console.log('id ', id)
-    return this._heroes.updateOne({ _id: id }, { $set: item });
+    return this._schema.updateOne({ _id: id }, { $set: item });
   }
 
   delete(id) {
-    return this._heroes.deleteOne({ _id: id });
+    return this._schema.deleteOne({ _id: id });
   }
 
   async isConnected() {
@@ -42,26 +42,7 @@ class MongoDB extends ICrud {
     return STATUS[this._connection.readyState];
   }
 
-  defineModel() {
-    const heroeSchema = new Mongoose.Schema({
-      name: {
-        type: String,
-        required: true
-      },
-      power: {
-        type: String,
-        required: true
-      },
-      createdAt: {
-        type: Date,
-        default: new Date()
-      }
-    });
-
-    this._heroes = Mongoose.model("heroe", heroeSchema);
-  }
-
-  async connect() {
+  static connect() {
     Mongoose.connect(
       "mongodb://augustoscher:minhasenhasecreta@localhost:27017/heroes",
       { useNewUrlParser: true },
@@ -76,8 +57,7 @@ class MongoDB extends ICrud {
     connection.once("open", () => {
       console.log("Database rodando!")
     });
-    this._connection = connection;
-    this.defineModel();
+    return connection;
   }
 }
 
