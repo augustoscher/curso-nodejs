@@ -46,7 +46,8 @@ class PostgreSQL extends ICrud {
       host: "localhost",
       dialect: "postgres",
       quoteIdentifiers: false,
-      operatorAliases: false
+      operatorAliases: false,
+      logging: false,
     });
     return connection;
   }
