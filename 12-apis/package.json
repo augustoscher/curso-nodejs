@@ -1,0 +1,21 @@
+{
+  "name": "08-multi-db",
+  "version": "1.0.0",
+  "description": "```bash docker run \\   --name postgres \\   -e POSTGRES_USER=augustoscher \\   -e POSTGRES_PASSWORD=minhasenhasecreta \\   -e POSTGRES_DB=heroes \\   -p 5432:5432 \\   -d \\   postgres ``` #### Enter on postgres container ```bash docker exec -it postgres /bin/bash ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha src/test/*.test.js",
+    "test:watch": "mocha src/test/*.test.js -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^7.1.0",
+    "mongoose": "^5.9.4",
+    "pg": "^7.18.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.5"
+  },
+  "dependencies": {}
+}
