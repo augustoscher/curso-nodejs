@@ -8,7 +8,7 @@ const MOCKED_HERO_UPD = { name: 'Batman', power: 'Money' };
 
 let context = {};
 
-describe("Postgres Strategy", function () {
+describe("Hero Postgres Crud", function () {
   this.timeout(Infinity)
   this.beforeAll(async function () {
     const connection = await Postgres.connect();
