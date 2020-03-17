@@ -11,6 +11,43 @@ const randomSet = (length, max) => {
   return [...nums];
 }
 
+//map with self index
 const series = ['Better Call Saul', 'Game of Thrones', 'Breaking Bad'];
 const indexed = series.map((item, idx) => { return {id: idx, name: item} })
 console.log(indexed);
+console.log();
+
+//call dinamic methods of instance and desctruct the results in array
+class Test {
+  static methods() {
+    return Object.getOwnPropertyNames(this.prototype).filter(
+      method => method !== "constructor" && !method.startsWith("_")
+    );
+  }
+
+  list() {
+    return {
+      id: 'l',
+      name: 'list'
+    }
+  }
+
+  create() {
+    return {
+      id: 'c',
+      name: 'create'
+    }
+  }
+}
+
+const mapRoutes = (instance, methods) => {
+  return methods.map(method => instance[method]())
+}
+
+const methods = Test.methods();
+console.log(methods)
+
+const result = [
+  ...mapRoutes(new Test(), Test.methods())
+];
+console.log(result)
