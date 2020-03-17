@@ -15,6 +15,16 @@ class HeroRoutes extends BaseRoute {
       }
     };
   }
+
+  create() {
+    return {
+      path: "/heroes",
+      method: "POST",
+      handler: (request, headers) => {
+        // return this.db.create();
+      }
+    };
+  }
 }
 
 module.exports = HeroRoutes;

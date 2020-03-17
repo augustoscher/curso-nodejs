@@ -1,7 +1,7 @@
 const assert = require('assert');
 const api = require('../api');
 
-describe.only('Heroes API', function() {
+describe('Heroes API', function() {
   this.beforeAll(async () => {
     app = await api;
   });
