@@ -40,14 +40,16 @@ class Test {
   }
 }
 
-const mapRoutes = (instance, methods) => {
+const mapMethods = (instance, methods) => {
   return methods.map(method => instance[method]())
 }
 
 const methods = Test.methods();
-console.log(methods)
+console.log('instance methods ', methods)
 
+
+console.log('methods invoc ', mapMethods(new Test(), Test.methods()))
 const result = [
-  ...mapRoutes(new Test(), Test.methods())
+  ...mapMethods(new Test(), Test.methods())
 ];
-console.log(result)
+console.log('destruct on array ', result);
