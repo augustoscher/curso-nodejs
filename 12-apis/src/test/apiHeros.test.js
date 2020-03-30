@@ -18,14 +18,15 @@ describe("Heroes API", function() {
   });
 
   it("GET /heroes with skip and limit", async () => {
+    const LIMIT = 5
     const result = await app.inject({
       method: "GET",
-      url: "/heroes?skip=0&limit=5",
+      url: `/heroes?skip=0&limit=${LIMIT}`,
     });
 
     const data = JSON.parse(result.payload);
     assert.deepEqual(result.statusCode, 200);
     assert.ok(Array.isArray(data));
-    assert.ok(data.length === 5);
+    assert.deepEqual(data.length, LIMIT);
   });
 });
