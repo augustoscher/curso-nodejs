@@ -61,6 +61,42 @@ class HeroRoutes extends BaseRoute {
     };
   }
 
+  update() {
+    return {
+      path: "/heroes/{id}",
+      method: "PATCH",
+      handler: async (request) => {
+        try {
+          const { id } = request.params;
+          const payload = request.payload;
+
+          const aux = JSON.stringify(payload);
+          const data = JSON.parse(aux);
+
+          const result = await this.db.update(id, data);
+          return {
+            _id: id,
+            message: "Heroe sucessfully updated",
+          };
+        } catch (e) {
+          console.log("Deu ruim: ", e);
+          return "Internal Error";
+        }
+      },
+      options: {
+        validate: {
+          params: {
+            id: Joi.string().required()
+          },
+          payload: Joi.object({
+            name: Joi.string().min(3).max(100),
+            power: Joi.string().min(3).max(15),
+          })
+        }
+      }
+    };
+  }
+
 }
 
 module.exports = HeroRoutes;

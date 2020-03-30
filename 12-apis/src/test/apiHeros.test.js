@@ -8,8 +8,22 @@ describe("Heroes API", function() {
     power: 'Web Shooter'
   };
 
+  const DEFAULT_HERO_UPD = {
+    name: 'Universal Soldier',
+    power: 'Strength'
+  };
+
+  let MOCKED_ID;
+
   this.beforeAll(async () => {
     app = await api;
+    const result = await app.inject({
+      method: 'POST',
+      url: '/heroes',
+      payload: DEFAULT_HERO_UPD,
+    });
+    const data = JSON.parse(result.payload)
+    MOCKED_ID = data._id;
   });
 
   it("GET /heroes", async () => {
@@ -63,5 +77,24 @@ describe("Heroes API", function() {
     assert.deepEqual(result.statusCode, 200);
     assert.deepEqual(message, 'Heroe sucessfully created')
     assert.notStrictEqual(_id, undefined);
+  });
+
+  it("PATCH /heroes", async () => {
+    const expected = {
+      name: 'Pernalonga',
+      power: 'Smart',
+    };
+
+    const result = await app.inject({
+      method: "PATCH",
+      url: `/heroes/${MOCKED_ID}`,
+      payload: expected,
+    });
+
+    const payload = JSON.parse(result.payload);
+
+    assert.deepEqual(result.statusCode, 200);
+    assert.deepEqual(payload.message, 'Heroe sucessfully updated')
+    assert.notStrictEqual(payload._id, undefined);
   });
 });
