@@ -2,6 +2,12 @@ const assert = require("assert");
 const api = require("../api");
 
 describe("Heroes API", function() {
+
+  const DEFAULT_HERO = {
+    name: 'Spider Man',
+    power: 'Web Shooter'
+  };
+
   this.beforeAll(async () => {
     app = await api;
   });
@@ -43,5 +49,18 @@ describe("Heroes API", function() {
     assert.deepEqual(result.statusCode, 200);
     assert.ok(Array.isArray(data));
     assert.deepEqual(data[0].name, NAME);
+  });
+
+  it("POST /heroes", async () => {
+    const result = await app.inject({
+      method: "POST",
+      url: `/heroes`,
+      payload: DEFAULT_HERO,
+    });
+
+    const { message } = JSON.parse(result.payload);
+
+    assert.deepEqual(result.statusCode, 200);
+    assert.deepEqual(message, 'Heroe sucessfully created')
   });
 });
