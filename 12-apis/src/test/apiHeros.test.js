@@ -6,7 +6,7 @@ describe("Heroes API", function() {
     app = await api;
   });
 
-  it("", async () => {
+  it("GET /heroes", async () => {
     const result = await app.inject({
       method: "GET",
       url: "/heroes"
@@ -15,5 +15,17 @@ describe("Heroes API", function() {
     const data = JSON.parse(result.payload);
     assert.deepEqual(result.statusCode, 200);
     assert.ok(Array.isArray(data));
+  });
+
+  it("GET /heroes with skip and limit", async () => {
+    const result = await app.inject({
+      method: "GET",
+      url: "/heroes?skip=0&limit=5",
+    });
+
+    const data = JSON.parse(result.payload);
+    assert.deepEqual(result.statusCode, 200);
+    assert.ok(Array.isArray(data));
+    assert.ok(data.length === 5);
   });
 });
