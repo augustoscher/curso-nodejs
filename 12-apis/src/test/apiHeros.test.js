@@ -58,9 +58,10 @@ describe("Heroes API", function() {
       payload: DEFAULT_HERO,
     });
 
-    const { message } = JSON.parse(result.payload);
+    const { _id, message } = JSON.parse(result.payload);
 
     assert.deepEqual(result.statusCode, 200);
     assert.deepEqual(message, 'Heroe sucessfully created')
+    assert.notStrictEqual(_id, undefined);
   });
 });
