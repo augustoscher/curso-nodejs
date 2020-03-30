@@ -1,4 +1,5 @@
 const BaseRoute = require('./base/baseRoute');
+const Joi = require('joi');
 
 class HeroRoutes extends BaseRoute {
   constructor(db) {
@@ -13,19 +14,21 @@ class HeroRoutes extends BaseRoute {
       handler: (request, headers) => {
         try {
           const { skip, limit, name } = request.query;
-          let query = name ? { name: name } : {};
+          let query = name ? { name: {$regex: `(?i).*${name}*`} } : {};
 
-          if (skip && isNaN(skip))
-            throw Error('Invalid skip')
-          
-          if (skip && isNaN(limit))
-            throw Error('Invalid limit')
-
-          return this.db.read(query, parseInt(skip), parseInt(limit));
-
-        } catch(e) {
-          console.log('Deu ruim: ', e);
-          return "Internal Error"
+          return this.db.read(query, skip, limit);
+        } catch (e) {
+          console.log("Deu ruim: ", e);
+          return "Internal Error";
+        }
+      },
+      options: {
+        validate: {
+          query: Joi.object({
+            skip: Joi.number().integer().default(0),
+            limit: Joi.number().integer().default(10),
+            name: Joi.string().min(3).max(100),
+          })
         }
       }
     };

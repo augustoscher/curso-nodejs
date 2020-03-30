@@ -10,6 +10,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "GET",
       url: "/heroes"
+
     });
 
     const data = JSON.parse(result.payload);
