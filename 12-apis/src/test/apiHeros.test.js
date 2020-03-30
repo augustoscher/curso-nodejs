@@ -79,7 +79,7 @@ describe("Heroes API", function() {
     assert.notStrictEqual(_id, undefined);
   });
 
-  it("PATCH /heroes", async () => {
+  it("PATCH /heroes/{id}", async () => {
     const expected = {
       name: 'Pernalonga',
       power: 'Smart',
@@ -96,5 +96,17 @@ describe("Heroes API", function() {
     assert.deepEqual(result.statusCode, 200);
     assert.deepEqual(payload.message, 'Heroe sucessfully updated')
     assert.notStrictEqual(payload._id, undefined);
+  });
+
+  it("DELETE /heroes/{id}", async () => {
+    const result = await app.inject({
+      method: "DELETE",
+      url: `/heroes/${MOCKED_ID}`,
+    });
+
+    const payload = JSON.parse(result.payload);
+
+    assert.deepEqual(result.statusCode, 200);
+    assert.deepEqual(payload.message, 'Heroe sucessfully deleted')
   });
 });

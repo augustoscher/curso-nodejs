@@ -97,6 +97,32 @@ class HeroRoutes extends BaseRoute {
     };
   }
 
+  delete() {
+    return {
+      path: "/heroes/{id}",
+      method: "DELETE",
+      handler: async (request) => {
+        try {
+          const { id } = request.params;
+          await this.db.delete(id);
+          return {
+            message: "Heroe sucessfully deleted",
+          };
+        } catch (e) {
+          console.log("Deu ruim: ", e);
+          return "Internal Error";
+        }
+      },
+      options: {
+        validate: {
+          params: {
+            id: Joi.string().required()
+          },
+        }
+      }
+    };
+  }
+
 }
 
 module.exports = HeroRoutes;

@@ -23,7 +23,6 @@ class MongoDB extends ICrud {
   }
 
   update(id, item) {
-    console.log('id ', id)
     return this._schema.updateOne({ _id: id }, { $set: item });
   }
 
