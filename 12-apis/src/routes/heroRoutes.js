@@ -1,5 +1,6 @@
 const BaseRoute = require('./base/baseRoute');
 const Joi = require('joi');
+const Boom = require('boom');
 
 class HeroRoutes extends BaseRoute {
   constructor(db) {
@@ -19,7 +20,7 @@ class HeroRoutes extends BaseRoute {
           return this.db.read(query, skip, limit);
         } catch (e) {
           console.log("Deu ruim: ", e);
-          return "Internal Error";
+          return Boom.internal();
         }
       },
       options: {
@@ -47,7 +48,7 @@ class HeroRoutes extends BaseRoute {
           return { message: "Heroe sucessfully created", _id: result._id };
         } catch (e) {
           console.log("Deu ruim: ", e);
-          return "Internal Error";
+          return Boom.internal();
         }
       },
       options: {
@@ -80,7 +81,7 @@ class HeroRoutes extends BaseRoute {
           };
         } catch (e) {
           console.log("Deu ruim: ", e);
-          return "Internal Error";
+          return Boom.internal();
         }
       },
       options: {
@@ -104,13 +105,18 @@ class HeroRoutes extends BaseRoute {
       handler: async (request) => {
         try {
           const { id } = request.params;
-          await this.db.delete(id);
+          console.log('id', id)
+          const result = await this.db.delete(id);
+
+          if (result.n !== 1) {
+            return Boom.notFound('Id not found');
+          }
           return {
             message: "Heroe sucessfully deleted",
           };
         } catch (e) {
           console.log("Deu ruim: ", e);
-          return "Internal Error";
+          return Boom.internal();
         }
       },
       options: {

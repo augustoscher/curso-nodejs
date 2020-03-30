@@ -94,7 +94,7 @@ describe("Heroes API", function() {
     const payload = JSON.parse(result.payload);
 
     assert.deepEqual(result.statusCode, 200);
-    assert.deepEqual(payload.message, 'Heroe sucessfully updated')
+    assert.deepEqual(payload.message, 'Hero successfully updated')
     assert.notStrictEqual(payload._id, undefined);
   });
 
@@ -107,6 +107,18 @@ describe("Heroes API", function() {
     const payload = JSON.parse(result.payload);
 
     assert.deepEqual(result.statusCode, 200);
-    assert.deepEqual(payload.message, 'Heroe sucessfully deleted')
+    assert.deepEqual(payload.message, 'Hero successfully deleted')
+  });
+
+  it.only("DELETE /heroes/{id} - id inexistent", async () => {
+    const result = await app.inject({
+      method: "DELETE",
+      url: `/heroes/5e8284f5cccbd4d9581de703`,
+    });
+
+    const payload = JSON.parse(result.payload);
+
+    assert.deepEqual(result.statusCode, 404); //Not Found
+    assert.deepEqual(payload.message, 'Hero not found')
   });
 });
