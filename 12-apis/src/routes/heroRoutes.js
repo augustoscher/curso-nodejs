@@ -77,7 +77,7 @@ class HeroRoutes extends BaseRoute {
           const result = await this.db.update(id, data);
           return {
             _id: id,
-            message: "Heroe sucessfully updated",
+            message: "Hero successfully updated",
           };
         } catch (e) {
           console.log("Deu ruim: ", e);
@@ -109,10 +109,10 @@ class HeroRoutes extends BaseRoute {
           const result = await this.db.delete(id);
 
           if (result.n !== 1) {
-            return Boom.notFound('Id not found');
+            return Boom.notFound('Hero not found');
           }
           return {
-            message: "Heroe sucessfully deleted",
+            message: "Hero successfully deleted",
           };
         } catch (e) {
           console.log("Deu ruim: ", e);

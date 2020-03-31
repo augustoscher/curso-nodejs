@@ -110,7 +110,7 @@ describe("Heroes API", function() {
     assert.deepEqual(payload.message, 'Hero successfully deleted')
   });
 
-  it.only("DELETE /heroes/{id} - id inexistent", async () => {
+  it("DELETE /heroes/{id} - id inexistent", async () => {
     const result = await app.inject({
       method: "DELETE",
       url: `/heroes/5e8284f5cccbd4d9581de703`,
