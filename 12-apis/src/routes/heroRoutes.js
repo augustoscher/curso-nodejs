@@ -24,6 +24,9 @@ class HeroRoutes extends BaseRoute {
         }
       },
       options: {
+        tags: ['api'],
+        description: 'List heroes',
+        notes: 'Can paginate request and filter by name',
         validate: {
           query: Joi.object({
             skip: Joi.number().integer().default(0),
@@ -52,6 +55,9 @@ class HeroRoutes extends BaseRoute {
         }
       },
       options: {
+        tags: ['api'],
+        description: 'Create heroes',
+        notes: 'Create new hero',
         validate: {
           payload: Joi.object({
             name: Joi.string().required().min(3).max(100),
@@ -85,6 +91,9 @@ class HeroRoutes extends BaseRoute {
         }
       },
       options: {
+        tags: ['api'],
+        description: 'Update hero by id',
+        notes: 'Update an existing hero by id',
         validate: {
           params: {
             id: Joi.string().required()
@@ -120,6 +129,9 @@ class HeroRoutes extends BaseRoute {
         }
       },
       options: {
+        tags: ['api'],
+        description: 'Delete hero by id',
+        notes: 'Delete an existing hero by id',
         validate: {
           params: {
             id: Joi.string().required()
