@@ -2,6 +2,10 @@ const BaseRoute = require('./base/baseRoute');
 const Joi = require('joi');
 const Boom = require('boom');
 
+const headers = Joi.object({
+  authorization: Joi.string().required()
+}).unknown();
+
 class HeroRoutes extends BaseRoute {
   constructor(db) {
     super();
@@ -28,6 +32,7 @@ class HeroRoutes extends BaseRoute {
         description: 'List heroes',
         notes: 'Can paginate request and filter by name',
         validate: {
+          headers,
           query: Joi.object({
             skip: Joi.number().integer().default(0),
             limit: Joi.number().integer().default(10),
@@ -59,6 +64,7 @@ class HeroRoutes extends BaseRoute {
         description: 'Create heroes',
         notes: 'Create new hero',
         validate: {
+          headers,
           payload: Joi.object({
             name: Joi.string().required().min(3).max(100),
             power: Joi.string().required().min(3).max(15),
@@ -95,6 +101,7 @@ class HeroRoutes extends BaseRoute {
         description: 'Update hero by id',
         notes: 'Update an existing hero by id',
         validate: {
+          headers,
           params: {
             id: Joi.string().required()
           },
@@ -133,6 +140,7 @@ class HeroRoutes extends BaseRoute {
         description: 'Delete hero by id',
         notes: 'Delete an existing hero by id',
         validate: {
+          headers,
           params: {
             id: Joi.string().required()
           },

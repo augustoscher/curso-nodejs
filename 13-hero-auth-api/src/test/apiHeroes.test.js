@@ -1,6 +1,13 @@
 const assert = require("assert");
 const api = require("../api");
 
+let app = {};
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inh1bmRhIiwiaWQiOjEsImlhdCI6MTU4NTcxMjkwOH0.WTBAoRZ8f3Ut3-MBjs-1fbMTrJkwgt3tf2K1-AOfZ_E";
+
+const headers = {
+  Authorization: token,
+}
+
 describe("Heroes API", function() {
 
   const DEFAULT_HERO = {
@@ -19,6 +26,7 @@ describe("Heroes API", function() {
     app = await api;
     const result = await app.inject({
       method: 'POST',
+      headers,
       url: '/heroes',
       payload: DEFAULT_HERO_UPD,
     });
@@ -29,8 +37,8 @@ describe("Heroes API", function() {
   it("GET /heroes", async () => {
     const result = await app.inject({
       method: "GET",
+      headers,
       url: "/heroes"
-
     });
 
     const data = JSON.parse(result.payload);
@@ -42,6 +50,7 @@ describe("Heroes API", function() {
     const LIMIT = 5
     const result = await app.inject({
       method: "GET",
+      headers,
       url: `/heroes?skip=0&limit=${LIMIT}`,
     });
 
@@ -56,6 +65,7 @@ describe("Heroes API", function() {
     const NAME = "Iron Man"
     const result = await app.inject({
       method: "GET",
+      headers,
       url: `/heroes?skip=0&limit=${LIMIT}&name=${NAME}`,
     });
 
@@ -68,6 +78,7 @@ describe("Heroes API", function() {
   it("POST /heroes", async () => {
     const result = await app.inject({
       method: "POST",
+      headers,
       url: `/heroes`,
       payload: DEFAULT_HERO,
     });
@@ -87,6 +98,7 @@ describe("Heroes API", function() {
 
     const result = await app.inject({
       method: "PATCH",
+      headers,
       url: `/heroes/${MOCKED_ID}`,
       payload: expected,
     });
@@ -101,6 +113,7 @@ describe("Heroes API", function() {
   it("DELETE /heroes/{id}", async () => {
     const result = await app.inject({
       method: "DELETE",
+      headers,
       url: `/heroes/${MOCKED_ID}`,
     });
 
@@ -113,6 +126,7 @@ describe("Heroes API", function() {
   it("DELETE /heroes/{id} - id inexistent", async () => {
     const result = await app.inject({
       method: "DELETE",
+      headers,
       url: `/heroes/5e8284f5cccbd4d9581de703`,
     });
 

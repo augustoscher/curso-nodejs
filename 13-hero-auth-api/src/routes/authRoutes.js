@@ -6,6 +6,11 @@ const Joi = require('joi');
 const Boom = require('boom');
 const Jwt = require('jsonwebtoken');
 
+const USER = {
+  username: "xunda",
+  password: "123"
+};
+
 const failAction = (request, headers, error) => {
   throw error;
 }
@@ -22,8 +27,8 @@ class AuthRoutes extends BaseRoute {
       method: "POST",
       handler: async (request, headers) => {
         const { username, password } = request.payload;
-        if (username.toLowerCase() !== 'xunda') {
-          return Boom.unauthorized()
+        if (username.toLowerCase() !== USER.username || password.toLowerCase() !== USER.password) {
+          return Boom.unauthorized();
         }
 
         const token = Jwt.sign({

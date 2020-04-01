@@ -51,7 +51,7 @@ const main = async () => {
       //verifica no banco se o usuário continua ativo.
       //verifica no banco se o usuario continua pagando.
       return {
-        valid: true
+        isValid: true
       }
     }
   });
