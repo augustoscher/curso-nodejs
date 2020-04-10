@@ -6,18 +6,18 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inh1bmRhIiwiaWQiOjEsImlhdCI6MTU4NTcxMjkwOH0.WTBAoRZ8f3Ut3-MBjs-1fbMTrJkwgt3tf2K1-AOfZ_E";
 
 const headers = {
-  Authorization: token
+  Authorization: token,
 };
 
-describe("Heroes API", function() {
+describe("Heroes API", function () {
   const DEFAULT_HERO = {
     name: "Spider Man",
-    power: "Web Shooter"
+    power: "Web Shooter",
   };
 
   const DEFAULT_HERO_UPD = {
     name: "Universal Soldier",
-    power: "Strength"
+    power: "Strength",
   };
 
   let MOCKED_ID;
@@ -28,7 +28,7 @@ describe("Heroes API", function() {
       method: "POST",
       headers,
       url: "/heroes",
-      payload: DEFAULT_HERO_UPD
+      payload: DEFAULT_HERO_UPD,
     });
     const data = JSON.parse(result.payload);
     MOCKED_ID = data._id;
@@ -38,7 +38,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "GET",
       headers,
-      url: "/heroes"
+      url: "/heroes",
     });
 
     const data = JSON.parse(result.payload);
@@ -51,7 +51,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "GET",
       headers,
-      url: `/heroes?skip=0&limit=${LIMIT}`
+      url: `/heroes?skip=0&limit=${LIMIT}`,
     });
 
     const data = JSON.parse(result.payload);
@@ -66,7 +66,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "GET",
       headers,
-      url: `/heroes?skip=0&limit=${LIMIT}&name=${NAME}`
+      url: `/heroes?skip=0&limit=${LIMIT}&name=${NAME}`,
     });
 
     const data = JSON.parse(result.payload);
@@ -80,7 +80,7 @@ describe("Heroes API", function() {
       method: "POST",
       headers,
       url: `/heroes`,
-      payload: DEFAULT_HERO
+      payload: DEFAULT_HERO,
     });
 
     const { _id, message } = JSON.parse(result.payload);
@@ -93,14 +93,14 @@ describe("Heroes API", function() {
   it("PATCH /heroes/{id}", async () => {
     const expected = {
       name: "Pernalonga",
-      power: "Smart"
+      power: "Smart",
     };
 
     const result = await app.inject({
       method: "PATCH",
       headers,
       url: `/heroes/${MOCKED_ID}`,
-      payload: expected
+      payload: expected,
     });
 
     const payload = JSON.parse(result.payload);
@@ -114,7 +114,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "DELETE",
       headers,
-      url: `/heroes/${MOCKED_ID}`
+      url: `/heroes/${MOCKED_ID}`,
     });
 
     const payload = JSON.parse(result.payload);
@@ -127,7 +127,7 @@ describe("Heroes API", function() {
     const result = await app.inject({
       method: "DELETE",
       headers,
-      url: `/heroes/5e8284f5cccbd4d9581de703`
+      url: `/heroes/5e8284f5cccbd4d9581de703`,
     });
 
     const payload = JSON.parse(result.payload);
