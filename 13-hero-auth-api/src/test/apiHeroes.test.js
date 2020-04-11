@@ -1,7 +1,8 @@
 const assert = require("assert");
 const api = require("../api");
 
-
+const Context = require('../db/strategies/base/contextStrategy');
+const Postgres = require('../db/strategies/postgres/postgreSQL');
 
 let app = {};
 const token =
