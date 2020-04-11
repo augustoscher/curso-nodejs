@@ -8,6 +8,9 @@ const HeroRoute = require("./routes/heroRoutes");
 const AuthRoute = require("./routes/authRoutes");
 const HapiJwt = require('hapi-auth-jwt2');
 
+const Postgres = require('./db/strategies/postgres/postgreSQL')
+const UserSchema = require('./db/strategies/postgres/schemas/userSchema')
+
 const JWT_SECRET = 'MEU_SEGREDO_123';
 
 const HapiSwagger = require("hapi-swagger");
@@ -23,6 +26,10 @@ const app = new Hapi.Server({ port: 5000 });
 const main = async () => {
   const connection = MongoDB.connect();
   const context = new Context(new MongoDB(connection, HeroSchema));
+  const connectionPostgres = await Postgres.connect();
+  const model = await Postgres.defineModel(connectionPostgres, UserSchema);
+  const contextPostgres = new Context(new Postgres(connectionPostgres, model));
+
 
   const swaggerOptions = {
     info: {
@@ -60,7 +67,7 @@ const main = async () => {
 
   app.route([
     ...mapRoutes(new HeroRoute(context), HeroRoute.methods()),
-    ...mapRoutes(new AuthRoute(JWT_SECRET), AuthRoute.methods())
+    ...mapRoutes(new AuthRoute(JWT_SECRET, contextPostgres), AuthRoute.methods())
   ]);
 
   await app.start();

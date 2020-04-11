@@ -9,12 +9,12 @@ let app = {};
 
 const user = {
   username: 'xunda',
-  password: '123'
+  password: 'Olokinho123'
 };
 
 const databaseUser = {
   ...user,
-  password: ''
+  password: '$2b$04$KitYT7wBxicTiJdEZJeOyewRGJEKrMuky55najciDVe1xnBMVdbDC'
 };
 
 describe("Heroes API - Auth JWT", function() {
@@ -23,6 +23,8 @@ describe("Heroes API - Auth JWT", function() {
 
     const connectionPostgres = await Postgres.connect()
     const model = await Postgres.defineModel(connectionPostgres, UserSchema);
+    const postgres = new Context(new Postgres(connectionPostgres, model)); 
+    await postgres.update(null, databaseUser, true);
   });
 
   it('Should take a token', async () => {
@@ -31,7 +33,7 @@ describe("Heroes API - Auth JWT", function() {
       url: '/login',
       payload: {
         username: 'xunda',
-        password: '123'
+        password: 'Olokinho123'
       }
     });
 
