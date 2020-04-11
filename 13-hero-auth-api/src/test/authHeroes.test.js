@@ -31,10 +31,7 @@ describe("Heroes API - Auth JWT", function() {
     const result = await app.inject({
       method: 'POST',
       url: '/login',
-      payload: {
-        username: 'xunda',
-        password: 'Olokinho123'
-      }
+      payload: user
     });
 
     const data = JSON.parse(result.payload);
