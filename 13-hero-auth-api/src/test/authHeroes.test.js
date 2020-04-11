@@ -8,7 +8,7 @@ const UserSchema  = require('../db/strategies/postgres/schemas/userSchema');
 let app = {};
 
 const user = {
-  username: 'xunda',
+  username: 'xunda', //username deve ser minusculo
   password: 'Olokinho123'
 };
 
