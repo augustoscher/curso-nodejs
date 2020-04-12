@@ -1,5 +1,18 @@
 //npm i hapi
 //npm i vision inert hapi-swagger@9.1.3
+const { config } = require('dotenv');
+const { join } = require('path');
+const { ok } = require('assert');
+
+const env = process.env.NODE_ENV || "dev"
+ok(env === "prod" || env === "dev", 'Unknow ENV conf.');
+
+const configPath = join(__dirname, '../config', `.env.${env}`);
+
+config({
+  path: configPath
+})
+
 const Hapi = require("hapi");
 const Context = require("./db/strategies/base/contextStrategy");
 const MongoDB = require("./db/strategies/mongodb/mongodb");
@@ -11,7 +24,7 @@ const HapiJwt = require('hapi-auth-jwt2');
 const Postgres = require('./db/strategies/postgres/postgreSQL')
 const UserSchema = require('./db/strategies/postgres/schemas/userSchema')
 
-const JWT_SECRET = 'MEU_SEGREDO_123';
+const JWT_SECRET = process.env.JWT_KEY;
 
 const HapiSwagger = require("hapi-swagger");
 const Vision = require("vision");
@@ -21,7 +34,7 @@ const mapRoutes = (instance, methods) => {
   return methods.map(method => instance[method]());
 };
 
-const app = new Hapi.Server({ port: 5000 });
+const app = new Hapi.Server({ port: process.env.PORT });
 
 const main = async () => {
   const connection = MongoDB.connect();

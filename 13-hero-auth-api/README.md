@@ -69,3 +69,7 @@ docker exec -it mongodb \
 Red: Algorithm type
 Purple: Business Data
 Blue: Secret key, authentication info
+
+
+#### NODE ENV
+> cross-env NODE_ENV=prod yarn test

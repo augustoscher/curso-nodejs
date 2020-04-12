@@ -3,7 +3,7 @@ const api = require("../api");
 
 let app = {};
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inh1bmRhIiwiaWQiOjEsImlhdCI6MTU4NTcxMjkwOH0.WTBAoRZ8f3Ut3-MBjs-1fbMTrJkwgt3tf2K1-AOfZ_E";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inh1bmRhIiwiaWQiOjEsImlhdCI6MTU4NjcwNjg0MX0.kLaQvnpvyB-wWBoCwbf3wGFWPCBqNoyisXjCt_Ut2Y0";
 
 const headers = {
   Authorization: token,
@@ -30,6 +30,8 @@ describe("Heroes API", function () {
       url: "/heroes",
       payload: DEFAULT_HERO_UPD,
     });
+
+    console.log('request: ', result.payload);
     const data = JSON.parse(result.payload);
     MOCKED_ID = data._id;
   });
