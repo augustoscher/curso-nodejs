@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha src/test/*.test.js",
     "test:watch": "mocha src/test/*.test.js -w",
-    "test:prod": "cross-env NODE_ENV=prod yarn test"
+    "test:prod": "cross-env NODE_ENV=prod yarn test",
+    "prod": "cross-env NODE_ENV=prod node api.js"
   },
   "keywords": [],
   "author": "",
