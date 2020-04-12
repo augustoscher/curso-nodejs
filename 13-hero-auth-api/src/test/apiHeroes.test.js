@@ -2,28 +2,43 @@ const assert = require("assert");
 const api = require("../api");
 
 let app = {};
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inh1bmRhIiwiaWQiOjEsImlhdCI6MTU4NjcwNjg0MX0.kLaQvnpvyB-wWBoCwbf3wGFWPCBqNoyisXjCt_Ut2Y0";
-
-const headers = {
-  Authorization: token,
-};
 
 describe("Heroes API", function () {
   const DEFAULT_HERO = {
     name: "Spider Man",
     power: "Web Shooter",
   };
-
+  
   const DEFAULT_HERO_UPD = {
     name: "Universal Soldier",
     power: "Strength",
   };
-
+  
+  const user = {
+    username: 'xunda',
+    password: 'Olokinho123'
+  };
+  
   let MOCKED_ID;
+  
+  const token = "";
+
+  const headers = {
+    Authorization: token,
+  };
 
   this.beforeAll(async () => {
     app = await api;
+
+    const authResult = await app.inject({
+      method: 'POST',
+      url: '/login',
+      payload: user
+    });
+
+    let p = JSON.parse(authResult.payload);
+    headers.Authorization = p.token;
+
     const result = await app.inject({
       method: "POST",
       headers,
@@ -31,7 +46,6 @@ describe("Heroes API", function () {
       payload: DEFAULT_HERO_UPD,
     });
 
-    console.log('request: ', result.payload);
     const data = JSON.parse(result.payload);
     MOCKED_ID = data._id;
   });
